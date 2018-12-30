@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the API for a daily journal. This journal is special because:
 
-Things you may want to cover:
+* You can only make one entry, or "droplet," per day.
+* Your droplet has to be less than 3 lines (300 characters).
 
-* Ruby version
+Say just one special thing.
 
-* System dependencies
+Your droplet page for the day shows all of your droplets on that day, through time.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

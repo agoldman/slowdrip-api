@@ -10,6 +10,8 @@ class Api::V1::DropletsController < ApplicationController
   def show
   	@droplet = Droplet.find(params[:id])
   	render :show, status: 202
+
+  	#TODO show droplets through time
   end
 
   private
