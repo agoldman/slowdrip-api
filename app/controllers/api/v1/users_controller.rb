@@ -1,9 +1,4 @@
-module Api
-  module V1
-    class UsersController < ApplicationController
-      def profile
-      end
-    end
+class Api::V1::UsersController < ApplicationController
+  def profile
   end
 end
-
