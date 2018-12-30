@@ -4,6 +4,7 @@ class Api::V1::DropletsController < ApplicationController
   def create
   	@user = User.find(params[:user_id])
   	@droplet = @user.droplets.create(droplet_params)
+  	#TODO handle errors (no user, max size limit)
   	render :show, status: 202
   end
 
