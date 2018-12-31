@@ -1,1 +1,1 @@
-json.droplet @droplet
+json.droplets @droplets
