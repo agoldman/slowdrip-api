@@ -1,18 +1,17 @@
 class Friendship < ActiveRecord::Base
-  # after_create :create_inverse_relationship
-  # after_destroy :destroy_inverse_relationship
 
   belongs_to :user
   belongs_to :friend, class_name: 'User'
 
-  private
+  def self.two_way_create(user, friend)
+  	user.friends << friend
+  	friend.friends << user
+  end
 
-  # def create_inverse_relationship
-  #   friend.friendships.create(friend: user)
-  # end
+  def self.two_way_destroy(user, friend)
+  	friendship = user.friendships.find_by(friend: friend)
+  	friendship_inverse = friend.friendships.find_by(friend: user)
+  	Friendship.where(:id => [friendship.id, friendship_inverse.id]).destroy_all
+  end
 
-  # def destroy_inverse_relationship
-  #   friendship = friend.friendships.find_by(friend: user)
-  #   friendship.destroy if friendship
-  # end
 end
