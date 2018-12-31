@@ -10,4 +10,13 @@ class User < ActiveRecord::Base
   has_many :droplets
   has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
+
+  def todays_friendly_droplets
+  	Droplet.todays_friendly_droplets(self)
+  end
+
+  def todays_total_droplets
+  	Droplet.todays_total_droplets(self)
+  end
+
 end

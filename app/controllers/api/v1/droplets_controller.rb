@@ -2,22 +2,16 @@ class Api::V1::DropletsController < ApplicationController
   before_action :authenticate_api_v1_user!
 
   def create
-    #TODO: create friendship permission.
     @droplet = Droplet.new(droplet_params)
     @droplet.user = current_api_v1_user
 
     if @droplet.save
+      #TODO: redirect instead
       @droplets = @droplet.same_day_droplets(current_api_v1_user)
       render :show, status: 202
     else
       render :json => { :errors => @model.errors.full_messages }
     end
-  end
-
-  def show
-  	@droplet = Droplet.find(params[:id])
-    @droplets = @droplet.same_day_droplets(current_api_v1_user)
-  	render :show, status: 202
   end
 
   def index
