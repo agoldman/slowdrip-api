@@ -12,8 +12,10 @@ class Api::V1::DropletsController < ApplicationController
   	@droplet = Droplet.find(params[:id])
     @droplets = @droplet.same_day_droplets
   	render :show, status: 202
+  end
 
-  	#TODO show droplets through time
+  def index
+    @droplets = User.find(params[:user_id]).droplets.order(created_at: :desc)
   end
 
   private

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 	  mount_devise_token_auth_for 'User', at: 'auth'
       root :to => 'home#index'
       resources :users, :only => [:show] do
-      	resources :droplets, :only => [:create, :show]
+        resources :droplets, :only => [:create, :show, :index]
       end
     end
   end
