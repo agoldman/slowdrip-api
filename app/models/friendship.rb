@@ -6,6 +6,11 @@ class Friendship < ActiveRecord::Base
   after_create :create_inverse, unless: :has_inverse?
   after_destroy :destroy_inverses, if: :has_inverse?
 
+  validates :user, presence: true
+  validates :friend, presence: true, uniqueness: { scope: :user }
+
+  validate :not_self
+
   def create_inverse
     self.class.create(inverse_friendship_options)
   end
@@ -24,6 +29,12 @@ class Friendship < ActiveRecord::Base
 
   def inverse_friendship_options
     { user_id: friend_id, friend_id: user_id }
+  end
+
+  private
+
+  def not_self
+    errors.add(:friend, "can't be equal to user") if user == friend
   end
 
 end
