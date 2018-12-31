@@ -3,7 +3,7 @@ class Api::V1::DropletsController < ApplicationController
 
   def create
     #TODO: create friendship permission.
-    @droplet = Droplet.permission_personal.new(droplet_params)
+    @droplet = Droplet.new(droplet_params)
     @droplet.user = current_api_v1_user
 
     if @droplet.save
