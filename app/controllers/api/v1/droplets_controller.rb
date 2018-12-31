@@ -6,7 +6,7 @@ class Api::V1::DropletsController < ApplicationController
     @droplet.user = current_api_v1_user
 
     if @droplet.save
-      @droplets = @droplet.same_day_droplets
+      @droplets = @droplet.same_day_droplets(current_api_v1_user)
       render :show, status: 202
     else
       render :json => { :errors => @model.errors.full_messages }
@@ -15,7 +15,7 @@ class Api::V1::DropletsController < ApplicationController
 
   def show
   	@droplet = Droplet.find(params[:id])
-    @droplets = @droplet.same_day_droplets
+    @droplets = @droplet.same_day_droplets(current_api_v1_user)
   	render :show, status: 202
   end
 
