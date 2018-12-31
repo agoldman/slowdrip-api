@@ -2,7 +2,8 @@ class Api::V1::DropletsController < ApplicationController
   before_action :authenticate_api_v1_user!
 
   def create
-    @droplet = Droplet.new(droplet_params)
+    #TODO: create friendship permission.
+    @droplet = Droplet.permission_personal.new(droplet_params)
     @droplet.user = current_api_v1_user
 
     if @droplet.save
@@ -26,7 +27,7 @@ class Api::V1::DropletsController < ApplicationController
   private
 
   def droplet_params
-  	params.require(:droplet).permit(:content)
+    params.require(:droplet).permit(:content, :permission)
   end
 
 end
