@@ -6,4 +6,10 @@ class Api::V1::FriendsController < ApplicationController
     @friends = user.friends
   end
 
+  def remove
+  	User.find(params[:user_id]).friendships.find_by(friend: params[:id]).destroy
+  	render json: {}, status: :no_content
+  end
+
+
 end
