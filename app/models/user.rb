@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :droplets
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 end
