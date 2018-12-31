@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       root :to => 'home#index'
       resources :users, :only => [:show] do
         resources :droplets, :only => [:create, :show, :index]
+        resources :friends, :only => [:index]
       end
     end
   end
