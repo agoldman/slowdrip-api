@@ -18,8 +18,8 @@ end
 
 
 #Friendships
-april.friends << lloyd
-adam.friends << lloyd
+# april.friends << lloyd
+# adam.friends << lloyd
 
 #Droplets
 april.droplets.create!(content: "I'm having a good day [friends]",

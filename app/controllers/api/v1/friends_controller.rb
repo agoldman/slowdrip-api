@@ -6,7 +6,6 @@ class Api::V1::FriendsController < ApplicationController
     @friends = user.friends
   end
 
-  #TODO add authorization so user can only add a friend themselves
   def remove
   	@user = User.find(params[:user_id])
   	authorize @user, policy_class: FriendPolicy

@@ -9,6 +9,7 @@ class Friendship < ActiveRecord::Base
   validates :user, presence: true
   validates :friend, presence: true, uniqueness: { scope: :user }
 
+  validate :friend_request_exists, :on => :create
   validate :not_self
 
   def create_inverse
@@ -35,6 +36,15 @@ class Friendship < ActiveRecord::Base
 
   def not_self
     errors.add(:friend, "can't be equal to user") if user == friend
+  end
+
+  #Only allow friendships to be formed when they were initiated by a request.
+  #The request must have come from the "other" friend. You cannot accept
+  #your own friend request.
+  def friend_request_exists
+    if FriendRequest.where(user: friend, friend: user).count < 1
+      errors.add(:friend, "friendship requires friend request initiated by friend")
+    end
   end
 
 end
