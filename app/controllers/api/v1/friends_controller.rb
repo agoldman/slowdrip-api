@@ -8,7 +8,9 @@ class Api::V1::FriendsController < ApplicationController
 
   #TODO add authorization so user can only add a friend themselves
   def remove
-  	User.find(params[:user_id]).friendships.find_by(friend: params[:id]).destroy
+  	@user = User.find(params[:user_id])
+  	authorize @user, policy_class: FriendPolicy
+  	@user.friendships.find_by(friend: params[:id]).destroy
   	render json: {}, status: :no_content
   end
 

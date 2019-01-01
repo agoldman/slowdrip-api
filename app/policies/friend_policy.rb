@@ -9,4 +9,8 @@ class FriendPolicy
   def show?
     @friend.friends.exists?(@user.id)
   end
+
+  def remove?
+    @user == @friend
+  end
 end

@@ -1,6 +1,7 @@
 class Api::V1::FriendshipsController < ApplicationController
   before_action :authenticate_api_v1_user!
 
+  #Auth: only create if a friend request exists the other way
   def create
   	@friend = User.find(params.dig(:friend, :id))
   	current_api_v1_user.friends << @friend

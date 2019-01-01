@@ -13,10 +13,4 @@ class Api::V1::UsersController < ApplicationController
     render :show, status: 202
   end
 
-  private
-
-  def pundit_user
-    current_api_v1_user
-  end
-
 end
