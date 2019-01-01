@@ -82,6 +82,38 @@ ALTER SEQUENCE public.droplets_id_seq OWNED BY public.droplets.id;
 
 
 --
+-- Name: friend_requests; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.friend_requests (
+    id bigint NOT NULL,
+    user_id bigint,
+    friend_id bigint NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: friend_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.friend_requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: friend_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.friend_requests_id_seq OWNED BY public.friend_requests.id;
+
+
+--
 -- Name: friendships; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -181,6 +213,13 @@ ALTER TABLE ONLY public.droplets ALTER COLUMN id SET DEFAULT nextval('public.dro
 
 
 --
+-- Name: friend_requests id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.friend_requests ALTER COLUMN id SET DEFAULT nextval('public.friend_requests_id_seq'::regclass);
+
+
+--
 -- Name: friendships id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -208,6 +247,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 ALTER TABLE ONLY public.droplets
     ADD CONSTRAINT droplets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: friend_requests friend_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.friend_requests
+    ADD CONSTRAINT friend_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -256,6 +303,20 @@ CREATE INDEX index_droplets_on_user_id ON public.droplets USING btree (user_id);
 
 
 --
+-- Name: index_friend_requests_on_friend_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_friend_requests_on_friend_id ON public.friend_requests USING btree (friend_id);
+
+
+--
+-- Name: index_friend_requests_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_friend_requests_on_user_id ON public.friend_requests USING btree (user_id);
+
+
+--
 -- Name: index_friendships_on_friend_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -298,11 +359,27 @@ CREATE UNIQUE INDEX index_users_on_uid_and_provider ON public.users USING btree 
 
 
 --
+-- Name: friend_requests fk_rails_0094729689; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.friend_requests
+    ADD CONSTRAINT fk_rails_0094729689 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: droplets fk_rails_15a7967a65; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.droplets
     ADD CONSTRAINT fk_rails_15a7967a65 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: friend_requests fk_rails_965f96954e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.friend_requests
+    ADD CONSTRAINT fk_rails_965f96954e FOREIGN KEY (friend_id) REFERENCES public.users(id);
 
 
 --
@@ -338,6 +415,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181231002323'),
 ('20181231030124'),
 ('20181231030542'),
-('20181231032853');
+('20181231032853'),
+('20190101015524');
 
 

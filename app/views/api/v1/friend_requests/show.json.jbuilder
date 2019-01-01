@@ -1,0 +1,1 @@
+json.friend_request @friend_request
