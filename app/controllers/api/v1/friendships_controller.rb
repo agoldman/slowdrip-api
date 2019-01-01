@@ -10,6 +10,4 @@ class Api::V1::FriendshipsController < ApplicationController
   	render :show, status: 202
   end
 
-  private
-
 end
