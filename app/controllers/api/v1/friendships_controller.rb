@@ -1,11 +1,12 @@
 class Api::V1::FriendshipsController < ApplicationController
   before_action :authenticate_api_v1_user!
 
-  #TODO replace with a friend request model
   def create
-  	@user = User.find(params[:user_id])
   	@friend = User.find(params.dig(:friend, :id))
-  	@user.friends << @friend
+  	current_api_v1_user.friends << @friend
+  	FriendRequest.where(user: current_api_v1_user, friend: @friend)
+  	             .or(FriendRequest.where(user: @friend, friend: current_api_v1_user))
+  	             .destroy_all
   	render :show, status: 202
   end
 

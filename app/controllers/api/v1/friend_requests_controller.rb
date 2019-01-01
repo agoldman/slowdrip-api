@@ -3,7 +3,7 @@ class Api::V1::FriendRequestsController < ApplicationController
   before_action :set_friend_request, except: [:index, :create]
 
   def create
-    friend = User.find(params[:friend_id])
+    friend = User.find(params.dig(:friend, :id))
     @friend_request = current_api_v1_user.friend_requests.new(friend: friend)
 
     if @friend_request.save
