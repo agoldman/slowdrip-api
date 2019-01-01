@@ -5,6 +5,10 @@ class Droplet < ApplicationRecord
 
   enum permission: PERMISSIONS.map{ |item| [item, item] }.to_h, _prefix: :permission
 
+  #TODO: Find out if begging_of_day is defined by app's timezone or db timezone.
+  scope :today, -> { where(:created_at => (Time.now.beginning_of_day..Time.now.end_of_day)) }
+  validate :one_per_day, :on => :create
+
   #TODO: refactor these methods. Turn into scope.
   def friendly_same_day_droplets(user)
    	Droplet.where('extract(month from created_at) = ?
@@ -38,6 +42,15 @@ class Droplet < ApplicationRecord
                Time.now.day,
                user.id
              ).order(created_at: :desc)
+  end
+
+  private
+
+  #This is weird but allows for historic seed data to be created
+  def one_per_day
+    if user.droplets.today.count > 0
+      errors.add(:created_at, "can't be duplicate. Droplet already exists for today.")
+    end
   end
 
 end

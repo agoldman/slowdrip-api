@@ -7,10 +7,10 @@ class Api::V1::DropletsController < ApplicationController
 
     if @droplet.save
       #TODO: redirect instead
-      @droplets = @droplet.same_day_droplets(current_api_v1_user)
+      @droplets = current_api_v1_user.todays_total_droplets
       render :show, status: 202
     else
-      render :json => { :errors => @model.errors.full_messages }
+      render :json => { :errors => @droplet.errors.full_messages }, status: 422
     end
   end
 
