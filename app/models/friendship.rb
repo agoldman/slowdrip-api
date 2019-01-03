@@ -4,6 +4,7 @@ class Friendship < ActiveRecord::Base
   belongs_to :friend, class_name: 'User'
 
   after_create :create_inverse, unless: :has_inverse?
+  after_create :destroy_friend_request
   after_destroy :destroy_inverses, if: :has_inverse?
 
   validates :user, presence: true
@@ -13,7 +14,7 @@ class Friendship < ActiveRecord::Base
   validate :not_self
 
   def create_inverse
-    self.class.create(inverse_friendship_options)
+    self.class.create!(inverse_friendship_options)
   end
 
   def destroy_inverses
@@ -42,9 +43,17 @@ class Friendship < ActiveRecord::Base
   #The request must have come from the "other" friend. You cannot accept
   #your own friend request.
   def friend_request_exists
-    if FriendRequest.where(user: friend, friend: user).count < 1
-      errors.add(:friend, "friendship requires friend request initiated by friend")
+    unless has_inverse?
+      if FriendRequest.where(user: friend, friend: user).count < 1
+        errors.add(:friend, "friendship requires friend request initiated by friend")
+      end
     end
+  end
+
+  def destroy_friend_request
+    FriendRequest.where(user: user, friend: friend)
+                 .or(FriendRequest.where(user: friend, friend: user))
+                 .destroy_all
   end
 
 end

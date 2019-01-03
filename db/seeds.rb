@@ -17,11 +17,16 @@ adam = User.create!(email: "adam@snowflek.com", password: "snowfleklvr")
 end
 
 
-#Friendships
-# april.friends << lloyd
-# adam.friends << lloyd
+# FriendRequests
+FriendRequest.create!(user: april, friend: lloyd)
+FriendRequest.create!(user: adam, friend: april)
+FriendRequest.create!(user: adam, friend: lloyd)
 
-#Droplets
+# Friendships
+Friendship.create!(user: lloyd, friend: april)
+Friendship.create!(user: april, friend: adam)
+
+# Droplets
 april.droplets.create!(content: "I'm having a good day [friends]",
                        permission: "friends")
 
