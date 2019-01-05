@@ -5,8 +5,7 @@ class Droplet < ApplicationRecord
 
   enum permission: PERMISSIONS.map{ |item| [item, item] }.to_h, _prefix: :permission
 
-  #TODO: Find out if begging_of_day is defined by app's timezone or db timezone.
-  scope :today, -> { where(:created_at => (Time.now.beginning_of_day..Time.now.end_of_day)) }
+  scope :today, -> { where(:created_at => (Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)) }
   validate :one_per_day, :on => :create
 
   #TODO: refactor these methods. Turn into scope.
@@ -15,8 +14,8 @@ class Droplet < ApplicationRecord
   		           and extract(day from created_at) = ?
   		           and user_id = ?
   		           and permission = ?',
- 		           created_at.utc.month,
- 		           created_at.utc.day,
+ 		           created_at.month,
+ 		           created_at.day,
  		           user.id,
  		           "friends"
  		         ).order(created_at: :desc)
@@ -27,8 +26,8 @@ class Droplet < ApplicationRecord
   		           and extract(day from created_at) = ?
   		           and user_id = ?
   		           and permission = ?',
- 		           Time.now.utc.month,
- 		           Time.now.utc.day,
+ 		           Time.zone.now.month,
+ 		           Time.zone.now.day,
  		           user.id,
  		           "friends"
  		         ).order(created_at: :desc)
@@ -38,8 +37,8 @@ class Droplet < ApplicationRecord
     Droplet.where('extract(month from created_at) = ?
                  and extract(day from created_at) = ?
                  and user_id = ?',
-               Time.now.utc.month,
-               Time.now.utc.day,
+               Time.zone.now.month,
+               Time.zone.now.day,
                user.id
              ).order(created_at: :desc)
   end
