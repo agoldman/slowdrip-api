@@ -15,8 +15,8 @@ class Droplet < ApplicationRecord
   		           and extract(day from created_at) = ?
   		           and user_id = ?
   		           and permission = ?',
- 		           created_at.month,
- 		           created_at.day,
+ 		           created_at.utc.month,
+ 		           created_at.utc.day,
  		           user.id,
  		           "friends"
  		         ).order(created_at: :desc)
@@ -27,8 +27,8 @@ class Droplet < ApplicationRecord
   		           and extract(day from created_at) = ?
   		           and user_id = ?
   		           and permission = ?',
- 		           Time.now.month,
- 		           Time.now.day,
+ 		           Time.now.utc.month,
+ 		           Time.now.utc.day,
  		           user.id,
  		           "friends"
  		         ).order(created_at: :desc)
@@ -38,8 +38,8 @@ class Droplet < ApplicationRecord
     Droplet.where('extract(month from created_at) = ?
                  and extract(day from created_at) = ?
                  and user_id = ?',
-               Time.now.month,
-               Time.now.day,
+               Time.now.utc.month,
+               Time.now.utc.day,
                user.id
              ).order(created_at: :desc)
   end
