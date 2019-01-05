@@ -25,6 +25,7 @@ FriendRequest.create!(user: adam, friend: lloyd)
 # Friendships
 Friendship.create!(user: lloyd, friend: april)
 Friendship.create!(user: april, friend: adam)
+Friendship.create!(user: lloyd, friend: adam)
 
 # Droplets
 april.droplets.create!(content: "I'm having a good day [friends]",

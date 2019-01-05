@@ -8,4 +8,16 @@ class Api::V1::FriendshipsController < ApplicationController
   	render :show, status: 202
   end
 
+  def index
+    @friendships = current_api_v1_user.friendships
+  end
+
+  # TODO build error handling
+  def destroy
+  	@friendship = Friendship.find(params[:id])
+  	authorize @friendship
+  	@friendship.destroy
+  	render json: {}, status: 200
+  end
+
 end

@@ -10,7 +10,4 @@ class FriendPolicy
     @friend.friends.exists?(@user.id)
   end
 
-  def remove?
-    @user == @friend
-  end
 end
