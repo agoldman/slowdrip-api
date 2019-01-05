@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	  namespace :v1 do
 	    #TODO: Can the client handle sign up / sign in directly to the API without a proxy?
 	    mount_devise_token_auth_for 'User', at: 'auth'
+      #TODO: where to route to when you are logged in?
       root :to => 'home#index'
       resources :friend_requests, :only => [:create, :index, :destroy]
       resources :friendships, :only => [:create, :index, :destroy]
