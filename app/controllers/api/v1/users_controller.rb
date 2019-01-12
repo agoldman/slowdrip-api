@@ -13,4 +13,8 @@ class Api::V1::UsersController < ApplicationController
     render :show, status: 202
   end
 
+  def search
+    @users = User.where(email: params[:email])
+  end
+
 end

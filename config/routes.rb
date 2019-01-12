@@ -11,6 +11,9 @@ Rails.application.routes.draw do
       resources :users, :only => [:show] do
         resources :droplets, :only => [:show]
         resources :friends, :only => [:index]
+        collection do
+          get 'search'
+        end
       end
     end
   end

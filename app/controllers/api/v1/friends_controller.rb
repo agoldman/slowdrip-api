@@ -4,8 +4,8 @@ class Api::V1::FriendsController < ApplicationController
   #TODO make this not an n+1 query.
   def index
   	@user = User.find(params[:user_id])
- 	@friends = @user.friends.includes(:droplets)
- 	@friends.each do |friend|
+ 	  @friends = @user.friends.includes(:droplets)
+ 	  @friends.each do |friend|
       nd = friend.droplets.select do |droplet|
             (droplet.permission == "friends") &&
             (droplet.created_at.month == Time.zone.now.month) &&
