@@ -17,10 +17,15 @@ adam = User.create!(email: "adam@snowflek.com", password: "snowfleklvr")
 end
 
 
-# FriendRequests
+# FriendRequests. Note that friend_requests are deleted when a Friendship
+# is created.
 FriendRequest.create!(user: april, friend: lloyd)
 FriendRequest.create!(user: adam, friend: april)
 FriendRequest.create!(user: adam, friend: lloyd)
+FriendRequest.create!(user: april, friend: User.find(10))
+FriendRequest.create!(user: User.find(9), friend: april)
+FriendRequest.create!(user: adam, friend: User.find(8))
+FriendRequest.create!(user: User.find(7), friend: adam)
 
 # Friendships
 Friendship.create!(user: lloyd, friend: april)

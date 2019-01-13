@@ -15,7 +15,8 @@ class Api::V1::FriendRequestsController < ApplicationController
 
   def index
     @incoming = FriendRequest.where(friend: current_api_v1_user)
-    @outgoing = current_api_v1_user.friend_requests
+                             .includes(:user, :friend)
+    @outgoing = current_api_v1_user.friend_requests.includes(:friend)
   end
 
   #TODO: add auth: can only destroy a request if you are the user or friend in the request.
