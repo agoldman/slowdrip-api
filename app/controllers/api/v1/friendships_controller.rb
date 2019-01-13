@@ -11,6 +11,7 @@ class Api::V1::FriendshipsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @friendships = @user.friendships.includes(:friend)
+    authorize @friendships.first
   end
 
   # TODO build error handling
