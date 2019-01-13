@@ -9,7 +9,7 @@ class Api::V1::FriendshipsController < ApplicationController
   end
 
   def index
-    @friendships = current_api_v1_user.friendships
+    @friendships = current_api_v1_user.friendships.includes(:friend)
   end
 
   # TODO build error handling
