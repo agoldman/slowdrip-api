@@ -21,18 +21,6 @@ class Droplet < ApplicationRecord
  		         ).order(created_at: :desc)
   end
 
-  def self.todays_friendly_droplets(user)
-  	Droplet.where('extract(month from created_at) = ?
-  		           and extract(day from created_at) = ?
-  		           and user_id = ?
-  		           and permission = ?',
- 		           Time.zone.now.month,
- 		           Time.zone.now.day,
- 		           user.id,
- 		           "friends"
- 		         ).order(created_at: :desc)
-  end
-
   def self.todays_total_droplets(user)
     Droplet.where('extract(month from created_at) = ?
                  and extract(day from created_at) = ?

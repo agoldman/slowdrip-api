@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
       @droplets = @user.todays_total_droplets
     else
       authorize @user, policy_class: FriendPolicy
-      @droplets = @user.todays_friendly_droplets
+      @droplets = @user.todays_total_droplets
     end
     render :show, status: 202
   end

@@ -6,11 +6,12 @@ Rails.application.routes.draw do
       #TODO: where to route to when you are logged in?
       root :to => 'home#index'
       resources :friend_requests, :only => [:create, :index, :destroy]
-      resources :friendships, :only => [:create, :index, :destroy]
+      resources :friendships, :only => [:create, :destroy]
       resources :droplets, :only => [:create, :index]
+      resources :friends, :only => [:index]
       resources :users, :only => [:show] do
         resources :droplets, :only => [:show]
-        resources :friends, :only => [:index]
+        resources :friendships, :only => [:index]
         collection do
           get 'search'
         end
