@@ -33,56 +33,44 @@ Friendship.create!(user: april, friend: adam)
 Friendship.create!(user: lloyd, friend: adam)
 
 # Droplets
-april.droplets.create!(content: "I'm having a good day [friends]",
-                       permission: "friends")
+april.droplets.create!(content: "I'm having a good day")
 
-User.last.droplets.create!(content: "I like Sightglass decaf [friends]",
-                       permission: "friends")
+User.last.droplets.create!(content: "I like Sightglass decaf")
                    .update_attributes(user: april,
                                      created_at: Time.now - 1.year)
 
-User.last.droplets.create!(content: "My deepest secret [personal]",
-	                   permission: "personal")
+User.last.droplets.create!(content: "My deepest secret")
                    .update_attributes(user: april,
                                      created_at: Time.now - 1.day)
 
-User.last.droplets.create!(content: "My darkest secret [personal]",
-                       permission: "personal")
+User.last.droplets.create!(content: "My darkest secret")
                    .update_attributes(user: april,
                                      created_at: Time.now - 2.years)
 
-lloyd.droplets.create!(content: "Woof woof woof [friends]",
-                       permission: "friends")
+lloyd.droplets.create!(content: "Woof woof woof")
 
-User.last.droplets.create!(content: "Bark bark bark [friends]",
-                       permission: "friends")
+User.last.droplets.create!(content: "Bark bark bark [friends]")
                   .update_attributes(user: lloyd,
                                      created_at: Time.now - 1.year)
 
-User.last.droplets.create!(content: "I can secretly talk [personal]",
-                       permission: "personal")
+User.last.droplets.create!(content: "I can secretly talk [personal]")
                   .update_attributes(user: lloyd,
                                      created_at: Time.now - 1.day)
 
-User.last.droplets.create!(content: "I know calculus [personal]",
-                       permission: "personal")
+User.last.droplets.create!(content: "I know calculus")
                   .update_attributes(user: lloyd,
                                      created_at: Time.now - 2.years)
 
-adam.droplets.create!(content: "I live in San Francisco [friends]",
-                      permission: "friends")
+adam.droplets.create!(content: "I live in San Francisco")
 
-User.last.droplets.create!(content: "I like music [friends]",
-                           permission: "friends")
+User.last.droplets.create!(content: "I like music")
                   .update_attributes(user: adam,
                                      created_at: Time.now - 1.year)
 
-User.last.droplets.create!(content: "I want to steal lloyd [personal]",
-                          permission: "personal")
+User.last.droplets.create!(content: "I want to steal lloyd")
                   .update_attributes(user: adam,
                                      created_at: Time.now - 1.day)
 
-User.last.droplets.create!(content: "My plot to steal lloyd is coming along [personal]",
-                          permission: "personal")
+User.last.droplets.create!(content: "My plot to steal lloyd is coming along")
                   .update_attributes(user: adam,
                                      created_at: Time.now - 2.years)

@@ -22,16 +22,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
---
--- Name: permission_level; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE public.permission_level AS ENUM (
-    'personal',
-    'friends'
-);
-
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -57,8 +47,7 @@ CREATE TABLE public.droplets (
     user_id bigint,
     content character varying(300),
     created_at timestamp with time zone NOT NULL,
-    updated_at timestamp with time zone NOT NULL,
-    permission public.permission_level DEFAULT 'personal'::public.permission_level
+    updated_at timestamp with time zone NOT NULL
 );
 
 
@@ -289,13 +278,6 @@ CREATE INDEX index_droplets_on_created_at ON public.droplets USING btree (create
 
 
 --
--- Name: index_droplets_on_permission; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_droplets_on_permission ON public.droplets USING btree (permission);
-
-
---
 -- Name: index_droplets_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -416,6 +398,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181231030124'),
 ('20181231030542'),
 ('20181231032853'),
-('20190101015524');
+('20190101015524'),
+('20190113222446');
 
 
