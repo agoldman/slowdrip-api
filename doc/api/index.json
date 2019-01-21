@@ -1,0 +1,17 @@
+{
+  "resources": [
+    {
+      "name": "Users (V1)",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Show a user",
+          "link": "users_(v1)/show_a_user.json",
+          "groups": "all",
+          "route": "api/v1/users/:id",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}

@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
       authorize @user, policy_class: FriendPolicy
       @droplets = @user.todays_total_droplets
     end
-    render :show, status: 202
+    render :show, status: 200
   end
 
   def search

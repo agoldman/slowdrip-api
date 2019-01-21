@@ -1,0 +1,86 @@
+{
+  "resource": "Users (V1)",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "api/v1/users/:id",
+  "description": "Show a user",
+  "explanation": null,
+  "parameters": [
+    {
+      "Type": "Integer",
+      "name": "id",
+      "description": "The id of the user you wish to view."
+    }
+  ],
+  "response_fields": [
+    {
+      "Type": "Integer",
+      "scope": "user",
+      "name": "id",
+      "description": "The user's id."
+    },
+    {
+      "Type": "Integer",
+      "scope": "user",
+      "name": "name",
+      "description": "The user's name."
+    },
+    {
+      "Type": "Integer",
+      "scope": "user",
+      "name": "image",
+      "description": "The user's image"
+    },
+    {
+      "Type": "Integer",
+      "scope": "user",
+      "name": "email",
+      "description": "The users's email"
+    },
+    {
+      "Type": "Array",
+      "scope": "user",
+      "name": "droplets",
+      "description": "The user's droplets for today"
+    }
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "api/v1/users/33",
+      "request_body": null,
+      "request_headers": {
+        "Access-Token": "kjEhVxuCf5LIkVQaKw8NYw",
+        "Token-Type": "Bearer",
+        "Client": "6r89P1fMuDRwuTUSOuFOIA",
+        "Expiry": "1549315037",
+        "Uid": "nicelady77@gmail.com",
+        "Content-Type": "application/json",
+        "Host": "example.org",
+        "Cookie": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"user\": {\n    \"id\": 33,\n    \"name\": null,\n    \"image\": null,\n    \"email\": \"nicelady77@gmail.com\",\n    \"droplets\": [\n\n    ]\n  }\n}",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8",
+        "access-token": "kjEhVxuCf5LIkVQaKw8NYw",
+        "token-type": "Bearer",
+        "client": "6r89P1fMuDRwuTUSOuFOIA",
+        "expiry": "1549315037",
+        "uid": "nicelady77@gmail.com",
+        "ETag": "W/\"449fc78203a8222127a3243593e036cc\"",
+        "Cache-Control": "max-age=0, private, must-revalidate",
+        "X-Request-Id": "f41052e3-c198-4690-8cb9-18d630dcae36",
+        "X-Runtime": "0.096087",
+        "Vary": "Origin",
+        "Content-Length": "88"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}
