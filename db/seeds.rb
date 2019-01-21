@@ -61,7 +61,10 @@ User.last.droplets.create!(content: "I know calculus")
                   .update_attributes(user: lloyd,
                                      created_at: Time.now - 2.years)
 
-adam.droplets.create!(content: "I live in San Francisco")
+adam
+  .droplets
+  .create!(content: "I live in San Francisco")
+  .update_attributes(user: adam, created_at: Time.now - 1.day)
 
 User.last.droplets.create!(content: "I like music")
                   .update_attributes(user: adam,
