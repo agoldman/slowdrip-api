@@ -9,7 +9,8 @@ class Api::V1::FriendRequestsController < ApplicationController
     if @friend_request.save
       render :show, status: :created
     else
-      render json: @friend_request.errors, status: :unprocessable_entity
+      @response = { success: false, errors: @friend_request.errors }
+      render json: @response, status: :unprocessable_entity
     end
   end
 
