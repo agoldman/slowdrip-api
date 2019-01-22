@@ -34,7 +34,9 @@ resource "Users (V1)" do
 		      name: user.name,
 		      image: user.image,
 		      email: user.email,
-		      droplets: []
+		      droplets: [],
+          algo: "all_time",
+          base_iterator: nil
 		      #TODO: test actual seeded droplets response
 		    }
 		  }.to_json

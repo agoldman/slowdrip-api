@@ -5,10 +5,10 @@ class Api::V1::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user.id == current_api_v1_user.id
-      @droplets = @user.todays_total_droplets
+      @todays_droplets = @user.todays_droplets
     else
       authorize @user, policy_class: FriendPolicy
-      @droplets = @user.todays_total_droplets
+      @todays_droplets = @user.todays_droplets
     end
     render :show, status: 200
   end
