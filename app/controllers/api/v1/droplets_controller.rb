@@ -4,11 +4,9 @@ class Api::V1::DropletsController < ApplicationController
   def create
     @droplet = Droplet.new(droplet_params)
     @droplet.user = current_api_v1_user
-
     if @droplet.save
       #TODO: redirect instead
-      #Exclude just created droplet from algo. TODO: Clean this up.
-      @todays_droplets = current_api_v1_user.todays_droplets(2)
+      @todays_droplets = current_api_v1_user.todays_droplets
       render :show, status: 202
     else
       render :json => { :errors => @droplet.errors.full_messages }, status: 422
